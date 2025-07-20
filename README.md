@@ -43,3 +43,8 @@ docker-compose up -d --build
 ```bash
 docker-compose exec <nazov_kontajnera> php artisan make:filament-user
 ```
+
+## Otvorenie admin panelu
+V oboch prípadoch bude admin panel dostupný na : 
+
+http://localhost:8000/admin
