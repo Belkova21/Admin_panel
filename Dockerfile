@@ -12,6 +12,8 @@ WORKDIR /var/www
 
 COPY . .
 
+RUN if [ ! -f .env ]; then cp .env.example .env && php artisan key:generate --force; fi
+
 RUN mkdir -p database && \
     if [ ! -f database/database.sqlite ]; then \
         touch database/database.sqlite; \
