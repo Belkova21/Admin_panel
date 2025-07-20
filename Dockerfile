@@ -12,8 +12,6 @@ WORKDIR /var/www
 
 COPY . .
 
-RUN if [ ! -f .env ]; then cp .env.example .env && php artisan key:generate --force; fi
-
 RUN mkdir -p database && \
     if [ ! -f database/database.sqlite ]; then \
         touch database/database.sqlite; \
@@ -24,5 +22,7 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 RUN php artisan storage:link || true
+
+RUN if [ ! -f .env ]; then cp .env.example .env && php artisan key:generate --force; fi
 
 CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000
